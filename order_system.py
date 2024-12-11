@@ -76,46 +76,51 @@ def update_order(order, menu_selection, menu_items):
 
     Parameters:
     order (list): A list of dictionaries containing the menu item name, price,
-                    and quantity ordered.
-    menu_selection (str): The customer's menu selection.
+                  and quantity ordered.
+    menu_selection (int): The customer's menu selection (converted to int).
     menu_items (dictionary): A dictionary containing the menu items and their
-                            prices.
+                             prices.
 
     Returns:
     order (list): A list of dictionaries containing the menu item name, price,
-                    and quantity ordered (updated as needed).
+                  and quantity ordered (updated as needed).
     """
-    # TODO: Check if the customer typed a number
+    try:
+        # Check if menu_selection is a valid number
+        menu_selection = int(menu_selection)
 
-        # TODO: Convert the menu selection to an integer
+        # Check if the menu selection is valid (exists in menu_items)
+        if menu_selection in menu_items:
+            # Get the menu item name and price from menu_items
+            item_name = menu_items[menu_selection]['name']
+            item_price = menu_items[menu_selection]['price']
 
+            # Ask the customer for the quantity of the selected item
+            try:
+                quantity = int(input(f"How many {item_name}(s) would you like to order? "))
+                if quantity < 1:
+                    print("Invalid quantity. Defaulting to 1.")
+                    quantity = 1
+            except ValueError:
+                print("Invalid input for quantity. Defaulting to 1.")
+                quantity = 1
 
-        # TODO: Check if the menu selection is in the menu items keys
+            # Add the item to the order list
+            order.append({
+                "Item name": item_name,
+                "Price": item_price,
+                "Quantity": quantity
+            })
+        else:
+            # Menu selection doesn't exist
+            print(f"Menu selection {menu_selection} is not valid. Please choose a valid menu option.")
+    except ValueError:
+        # Handle non-numeric input for menu selection
+        print("Invalid input. Please enter a valid menu number.")
 
-            # TODO: Store the item name as a variable
+    # Return the updated order
+    return order
 
-
-            # TODO: Ask the customer for the quantity of the menu item
-            # TODO: Use the item name variable in the question
-
-
-            # TODO: Check if the quantity is a number, default to 1 if not
-
-
-            # TODO: Add a dictionary to the order list 
-            # TODO: The dictionary should include the item name, price, and quantity
-            # TODO: Use the following names for the dictionary keys:
-            # TODO: "Item name", "Price", "Quantity"
-
-        # TODO: When the user's input isn't valid, 
-        # TODO: tell the customer that their input isn't valid
-
-    # TODO: When the menu selection wasn't valid:
-    # TODO: Print the menu selection and 
-    # TODO: Tell the customer they didn't select a menu option
-
-
-    # TODO: Return the updated order
 
 
 def print_itemized_receipt(receipt):
