@@ -17,7 +17,24 @@ AS A hungry customer with hearing and vocal impairments
 I WANT to view a menu, place an order, and see my receipt
 SO THAT I don't have to interact with a person until I collect my food
 ```
+"""
+    Displays a restaurant menu, asks customers for their order, then returns
+    their receipt and total price.
 
+    Parameters:
+    menu (dictionary): A nested dictionary containing the menu items and their 
+                       prices, using the following format:
+                        {
+                            "Food category": {
+                                "Meal": price
+                            }
+                        }
+
+    Returns:
+    order (list): A list of dictionaries containing the menu item name, price,
+                  and quantity ordered.
+    order_total (float): The total price of the order.
+    """
 ## Acceptance Criteria
 
 ```text
